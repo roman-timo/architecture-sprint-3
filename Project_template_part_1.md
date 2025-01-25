@@ -96,7 +96,7 @@
 **Диаграмма кода (Code)**
 
 [Code](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/SH_Code.puml)
-[Code PNG](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/SH_Code.png)
+[Code PNG](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/SH_Code2.png)
 
 # Задание 3. Разработка ER-диаграммы
 
