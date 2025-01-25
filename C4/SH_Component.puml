@@ -1,5 +1,5 @@
 @startuml
-title Система "Умный дом" - Context Diagram
+title Система "Умный дом" - Component Diagram
 
 top to bottom direction
 
