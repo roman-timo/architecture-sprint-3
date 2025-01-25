@@ -1,0 +1,37 @@
+@startuml
+title Умный дом / Управление пользователем (C4 диаграмма кода)
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+class User {
+  +String name
+  +String email
+  +String house
+  +void register()
+  +void login()
+}
+
+class Device {
+  +String name
+  +String type
+  +String status
+  +void activate()
+  +void deactivate()
+}
+
+class House {
+  +String address
+  +List<Device> devices
+  +List<User> users
+  +void add_user()
+  +void add_device()
+  +void remove_user()
+  +void remove_device()
+}
+
+House "1" -- "0..*" Device : has
+House "1" -- "0..*" User : has
+
+@enduml

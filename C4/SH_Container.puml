@@ -1,0 +1,43 @@
+@startuml
+title Система "Умный дом" - Context Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "Пользователь", "Пользователь системы")
+Person(admin, "Администратор", "Администратор системы")
+System(SmartHouse, "Система Умный Дом", "Система управления и мониторинга устройств в доме")
+
+Container_Boundary(SmartHouse, "Система Умный Дом") {
+  Container(WebApp, "Веб-приложение", "React", "Взаимодействие с пользователями")
+  Container(UserManagement, "Управление пользователями", "Python, PostgreSQL", "Управление профилями пользователей")
+  Container(VideoService, "Видеохостинг", "Go, S3", "Управление видеокамерами, сохранение видео")
+  Container(Telemetry, "Система мониторинга", "Python, ClickHouse", "Сбор и обработка данных с сенсоров")
+  Container(DeviceManagement, "Управление устройствами", "Python", "Управление умными устройствами")
+  Container(DeviceDB, "База данных устройств", "PostgreSQL", "Устройства")
+  Container(APIGateway, "API Gateway", "Kong", "Маршрутизация, авторизация, балансировка")
+  Container(Kafka, "Очередь сообщений", "Kafka", "Получение телеметрии")
+}
+
+
+System_Ext(SmartDevices, "Умные устройства/сенсоры", "Сенсоры и умные устроства с удаленным управлением: свет, отопление, тд")
+System_Ext(video, "Видеокамеры", "Система видеонаблюдения")
+
+Rel(user, APIGateway, "Использует")
+Rel(admin, APIGateway, "Конфигурирует")
+Rel(APIGateway, WebApp, "")
+Rel(WebApp, UserManagement, "")
+Rel(WebApp, DeviceManagement, "")
+Rel(WebApp, Telemetry, "")
+Rel(WebApp, VideoService, "")
+Rel(DeviceManagement, SmartDevices, "Управляет устройствами")
+Rel(UserManagement, DeviceDB, "Получение данных об устройствах пользователя")
+Rel(DeviceManagement, DeviceDB, "Чтение/запись данных об устройствах")
+Rel(Telemetry, DeviceDB, "Получение актуального списка устройств")
+Rel(VideoService, DeviceDB, "Получение актуального списка видеокамер")
+Rel(SmartDevices, Kafka,"Отправляют телеметрию")
+Rel(Kafka, Telemetry, "Читает телеметрию")
+Rel(video, VideoService,"Отправляет видеопоток")
+
+@enduml

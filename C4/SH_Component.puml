@@ -1,0 +1,53 @@
+@startuml
+title Система "Умный дом" - Context Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "Пользователь", "Пользователь системы")
+Person(admin, "Администратор", "Администратор системы")
+System(SmartHouse, "Система Умный Дом", "Система управления и мониторинга устройств в доме")
+
+Container_Boundary(SmartHouse, "Система Умный Дом") {
+  Container(WebApp, "Веб-приложение", "React", "Взаимодействие с пользователями")
+  Container_Boundary(UserManagement, "Управление пользователями") {
+    Component(UserProfile, "Личный кабинет", "Python", "Управление профилями пользователей")
+    Component(UserDB, "База данных пользователей", "PostgreSQL", "Пользователи")
+  }
+  Container_Boundary(VideoService, "Видеохостинг") {
+    Component(VideoManager, "Управление видеопотоком", "Go", "Управление видеокамерами, сохранение видео")
+    Component(VideoDB, "База данных видео", "S3", "Видеохостинг")
+  }
+  Container_Boundary(Telemetry, "Система мониторинга") {
+    Component(Processing, "Обработка телеметрии", "Go", "Сбор и обработка данных с сенсоров")
+    Component(Analytics, "Сервис аналитики", "Python", "Аналитика и отчеты")
+    Component(TelemetryDB, "База данных телеметрии", "ClickHouse", "Телеметрия с сенсоров")
+  }
+  Container(DeviceManagement, "Управление устройствами", "Python", "Управление умными устройствами")
+  Container(DeviceDB, "База данных устройств", "PostgreSQL", "Устройства")
+  Container(APIGateway, "API Gateway", "Kong", "Маршрутизация, авторизация, балансировка")
+  Container(Kafka, "Очередь сообщений", "Kafka", "Получение телеметрии")
+}
+
+
+System_Ext(SmartDevices, "Умные устройства/сенсоры", "Сенсоры и умные устроства с удаленным управлением: свет, отопление, тд")
+System_Ext(video, "Видеокамеры", "Система видеонаблюдения")
+
+Rel(user, APIGateway, "Использует")
+Rel(admin, APIGateway, "Конфигурирует")
+Rel(APIGateway, WebApp, "")
+Rel(WebApp, UserProfile, "")
+Rel(WebApp, DeviceManagement, "Конфигурация устройств")
+Rel(WebApp, Analytics, "Мониторинг")
+Rel(WebApp, VideoManager, "")
+Rel(DeviceManagement, SmartDevices, "Управляет устройствами")
+Rel(UserProfile, DeviceDB, "Получение данных об устройствах пользователя")
+Rel(DeviceManagement, DeviceDB, "Чтение/запись данных об устройствах")
+Rel(Analytics, DeviceDB, "Получение актуального списка устройств")
+Rel(SmartDevices, Kafka,"Отправляют телеметрию")
+Rel(Kafka, Processing, "Читает телеметрию")
+Rel(video, VideoManager,"Отправляет видеопоток")
+Rel(DeviceManagement, VideoManager,"Управление видеокамерами")
+
+@enduml
