@@ -78,10 +78,8 @@
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-```markdown
 [System Context](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/Context_System.puml)
 [System Context PNG](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/Context_System.png)
-```
 
 # Задание 2. Проектирование микросервисной архитектуры
 
