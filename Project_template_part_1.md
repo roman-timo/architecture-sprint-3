@@ -62,12 +62,8 @@
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-Добавьте сюда диаграмму контекста в модели C4.
-
-Чтобы добавить ссылку в файл Readme.md, нужно использовать синтаксис Markdown. Это делают так:
-
 ```markdown
-[System Context](https://github.com/roman-timo/architecture-sprint-3/blob/b655a721f1107f9e10b1468883b389050f6e2bfc/C4/Context_System.puml)
+[System Context](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/Context_System.puml)
 ```
 
 # Задание 2. Проектирование микросервисной архитектуры
