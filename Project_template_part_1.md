@@ -100,4 +100,7 @@
 
 # Задание 3. Разработка ER-диаграммы
 
-Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
+**Диаграмма связей (ERD)**
+
+[ERD](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/SH_ER.puml)
+[ERD PNG](https://github.com/roman-timo/architecture-sprint-3/blob/sprint_3/C4/SH_ER.png)
