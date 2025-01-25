@@ -1,0 +1,22 @@
+@startuml
+title Система "Умный дом" - Context Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "Пользователь", "Пользователь системы")
+Person(admin, "Администратор", "Администратор системы")
+System(SmartHouse, "Система Умный Дом", "Система управления и мониторинга устройств в доме")
+
+System_Ext(SmartDevices, "Умные устройства", "Умные устроства с удаленным управлением: свет, отопление, тд")
+System_Ext(sensors, "Сенсоры", "Сенсоры температуры и др")
+System_Ext(video, "Видеокамеры", "Система видеонаблюдения")
+
+Rel(user, SmartHouse, "Использует")
+Rel(admin, SmartHouse,"Конфигурирует")
+Rel(SmartHouse, SmartDevices,"Управляет устройствами")
+Rel(sensors, SmartHouse,"Принимает данные с сенсора")
+Rel(video, SmartHouse,"Принимает видеопоток")
+
+@enduml
